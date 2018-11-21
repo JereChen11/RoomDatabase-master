@@ -18,73 +18,51 @@
         android:layout_height="match_parent"
         android:orientation="horizontal">
 
+        <LinearLayout
+            android:layout_width="150dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
+            <EditText
+                android:id="@+id/id_edit"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:hint="Id Number"
+                android:gravity="center"/>
 
-    <LinearLayout
-        android:layout_width="150dp"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+            <EditText
+                android:id="@+id/first_name_edit"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:hint="First Name"
+                android:gravity="center"/>
 
-        <EditText
-            android:id="@+id/id_edit"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:hint="Id Number"
-            android:gravity="center"/>
+            <EditText
+                android:id="@+id/last_name_edit"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:hint="Last Name"
+                android:gravity="center"/>
 
-        <EditText
-            android:id="@+id/first_name_edit"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:hint="First Name"
-            android:gravity="center"/>
+            <Button
+                android:id="@+id/save_button"
+                android:layout_width="120dp"
+                android:layout_height="50dp"
+                android:gravity="center"
+                android:layout_gravity="center"
+                android:textAllCaps="false"
+                android:text="Save Data"/>
 
-        <EditText
-            android:id="@+id/last_name_edit"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:hint="Last Name"
-            android:gravity="center"/>
-
-        <Button
-            android:id="@+id/save_button"
-            android:layout_width="120dp"
-            android:layout_height="50dp"
-            android:gravity="center"
-            android:layout_gravity="center"
-            android:textAllCaps="false"
-            android:text="Save Data"/>
-
+        </LinearLayout>
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="150dp"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:layout_marginStart="50dp">
-
-        <Button
-            android:id="@+id/read_button"
-            android:layout_width="120dp"
-            android:layout_height="50dp"
-            android:gravity="center"
-            android:layout_gravity="center"
-            android:textAllCaps="false"
-            android:text="Read Database"/>
-
-        <TextView
-            android:id="@+id/first_name_text"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:gravity="center"/>
-
-        <TextView
-            android:id="@+id/last_name_text"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:gravity="center"/>
-
-    </LinearLayout>
-
-    </LinearLayout>
+    <Button
+        android:id="@+id/next_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp"
+        android:text="Next"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
 </android.support.constraint.ConstraintLayout>
