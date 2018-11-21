@@ -13,15 +13,16 @@
         android:orientation="vertical"
         app:layout_constraintGuide_begin="180dp" />
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="horizontal">
+        android:gravity="center">
 
         <LinearLayout
             android:layout_width="150dp"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            >
 
             <EditText
                 android:id="@+id/id_edit"
@@ -44,17 +45,25 @@
                 android:hint="Last Name"
                 android:gravity="center"/>
 
+            <EditText
+                android:id="@+id/address_edit"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:hint="Address"
+                android:gravity="center"/>
+
             <Button
                 android:id="@+id/save_button"
                 android:layout_width="120dp"
                 android:layout_height="50dp"
                 android:gravity="center"
+                android:layout_marginTop="20dp"
                 android:layout_gravity="center"
                 android:textAllCaps="false"
                 android:text="Save Data"/>
 
         </LinearLayout>
-    </LinearLayout>
+    </RelativeLayout>
 
     <Button
         android:id="@+id/next_button"
@@ -62,6 +71,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="20dp"
         android:layout_marginBottom="20dp"
+        android:background="#54d4"
         android:text="Next"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>

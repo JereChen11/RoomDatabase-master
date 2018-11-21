@@ -19,6 +19,7 @@ public class SecondActivity extends AppCompatActivity {
     private EditText mInputSearchIdEditText;
     private TextView mFirstNameTextView;
     private TextView mLastNameTextView;
+    private TextView mAddressTextView;
     private AppDatabase mAppDatabase;
 
     @Override
@@ -31,6 +32,7 @@ public class SecondActivity extends AppCompatActivity {
         mAppDatabase = Room.databaseBuilder(getApplicationContext(),
                 AppDatabase.class, "database-name")
                 .allowMainThreadQueries()
+                .fallbackToDestructiveMigration()
                 .build();
 
         mReadButton.setOnClickListener(new View.OnClickListener() {
@@ -41,6 +43,7 @@ public class SecondActivity extends AppCompatActivity {
                 Log.d("tag", "" + mAppDatabase.userDao().getAll());
                 mFirstNameTextView.setText(user.getFirstName());
                 mLastNameTextView.setText(user.getLastName());
+                mAddressTextView.setText(user.getAddress());
             }
         });
     }
@@ -50,5 +53,6 @@ public class SecondActivity extends AppCompatActivity {
         mInputSearchIdEditText = findViewById(R.id.input_search_id_edit_text);
         mFirstNameTextView = findViewById(R.id.first_name_text);
         mLastNameTextView = findViewById(R.id.last_name_text);
+        mAddressTextView = findViewById(R.id.address_text);
     }
 }

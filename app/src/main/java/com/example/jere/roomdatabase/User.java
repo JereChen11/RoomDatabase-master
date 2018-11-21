@@ -15,6 +15,9 @@ public class User {
     @ColumnInfo(name = "last_name")
     public String lastName;
 
+    @ColumnInfo(name = "address")
+    public String address;
+
     public void setUid(int uid) {
         this.uid = uid;
     }
@@ -27,6 +30,10 @@ public class User {
         this.lastName = lastName;
     }
 
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
     public int getUid() {
         return uid;
     }
@@ -37,5 +44,9 @@ public class User {
 
     public String getLastName() {
         return lastName;
+    }
+
+    public String getAddress() {
+        return address;
     }
 }
