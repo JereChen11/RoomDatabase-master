@@ -13,6 +13,7 @@ public class MainActivity extends AppCompatActivity {
 
     private Button mSaveButton;
     private Button mReadButton;
+    private EditText mIdNumberEditText;
     private EditText mFirstNameEditText;
     private EditText mLastNameEditText;
     private TextView mFirstNameTextView;
@@ -34,9 +35,10 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 mUser = new User();
+                mUser.setUid(Integer.parseInt(mIdNumberEditText.getText().toString()));
                 mUser.setFirstName(mFirstNameEditText.getText().toString());
                 mUser.setLastName(mLastNameEditText.getText().toString());
-                mAppDatabase.userDao().insertAll();
+                mAppDatabase.userDao().insert(mUser);
                 Log.d("tag", "");
             }
         });
@@ -44,10 +46,11 @@ public class MainActivity extends AppCompatActivity {
         mReadButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mAppDatabase.userDao().getAll();
+                User user = new User();
+                user = mAppDatabase.userDao().findById(1);
                 Log.d("tag", "" + mAppDatabase.userDao().getAll());
-                mFirstNameTextView.setText(mUser.getFirstName());
-                mLastNameTextView.setText(mUser.getLastName());
+                mFirstNameTextView.setText(user.getFirstName());
+                mLastNameTextView.setText(user.getLastName());
             }
         });
 
@@ -56,6 +59,7 @@ public class MainActivity extends AppCompatActivity {
     private void findViewId() {
         mSaveButton = findViewById(R.id.save_button);
         mReadButton = findViewById(R.id.read_button);
+        mIdNumberEditText = findViewById(R.id.id_edit);
         mFirstNameEditText = findViewById(R.id.first_name_edit);
         mLastNameEditText = findViewById(R.id.last_name_edit);
         mFirstNameTextView = findViewById(R.id.first_name_text);
