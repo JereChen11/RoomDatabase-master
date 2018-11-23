@@ -1,10 +1,12 @@
 package com.example.jere.roomdatabase;
 
+import android.app.Activity;
 import android.arch.persistence.room.Room;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -30,9 +32,8 @@ public class SecondActivity extends AppCompatActivity {
         findViewId();
 
         mAppDatabase = Room.databaseBuilder(getApplicationContext(),
-                AppDatabase.class, "database-name")
+                AppDatabase.class, MainActivity.DB_NAME)
                 .allowMainThreadQueries()
-                .fallbackToDestructiveMigration()
                 .build();
 
         mReadButton.setOnClickListener(new View.OnClickListener() {
@@ -44,6 +45,10 @@ public class SecondActivity extends AppCompatActivity {
                 mFirstNameTextView.setText(user.getFirstName());
                 mLastNameTextView.setText(user.getLastName());
                 mAddressTextView.setText(user.getAddress());
+
+                // hide keyboard
+                InputMethodManager imm = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
+                imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
             }
         });
     }

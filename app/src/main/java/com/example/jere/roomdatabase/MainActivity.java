@@ -1,11 +1,16 @@
 package com.example.jere.roomdatabase;
 
+import android.app.Activity;
+import android.arch.persistence.db.SupportSQLiteDatabase;
 import android.arch.persistence.room.Room;
+import android.arch.persistence.room.migration.Migration;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -14,6 +19,8 @@ import android.widget.EditText;
  * @date 2018/11/21
  */
 public class MainActivity extends AppCompatActivity {
+
+    public static final String DB_NAME = "JERE_ROOM_DATABASE";
 
     private Button mSaveButton;
     private Button mNextButton;
@@ -31,44 +38,10 @@ public class MainActivity extends AppCompatActivity {
 
         findViewId();
 
-//        static final Migration MIGRATION_1_2 = new Migration(1, 2) {
-//            @Override
-//            public void migrate(@NonNull SupportSQLiteDatabase database) {
-//                database.execSQL("ALTER TABLE my_badge "
-//                        + " ADD COLUMN salutation TEXT");
-//                database.execSQL("ALTER TABLE my_badge "
-//                        + " ADD COLUMN visitor_type TEXT");
-//                database.execSQL("ALTER TABLE my_badge "
-//                        + " ADD COLUMN booth_number TEXT");
-//                database.execSQL("ALTER TABLE my_badge "
-//                        + " ADD COLUMN enable_photo_e_badge INTEGER NOT NULL DEFAULT 0");
-//                database.execSQL("ALTER TABLE my_badge "
-//                        + " ADD COLUMN photo_verified INTEGER NOT NULL DEFAULT 0");
-//                database.execSQL("ALTER TABLE my_badge "
-//                        + " ADD COLUMN info_verified INTEGER NOT NULL DEFAULT 0");
-//                database.execSQL("ALTER TABLE my_badge "
-//                        + " ADD COLUMN e_badge_profile_photo_image BLOB");
-//            }
-//        };
-//
-//        public synchronized static HKTDCFairAppDatabase getAppDatabase(Context context) {
-//            if (appDatabase == null) {
-//                synchronized (LOCK) {
-//                    if (appDatabase == null) {
-//                        appDatabase = Room.databaseBuilder(context,
-//                                HKTDCFairAppDatabase.class, DB_NAME)
-//                                .addMigrations(MIGRATION_1_2)
-//                                .allowMainThreadQueries().build();
-//                    }
-//                }
-//            }
-//            return appDatabase;
-//        }
-
         mAppDatabase = Room.databaseBuilder(getApplicationContext(),
-                AppDatabase.class, "database-name")
+                AppDatabase.class, DB_NAME)
+                .addMigrations(MIGRATION_1_2)
                 .allowMainThreadQueries()
-                .fallbackToDestructiveMigration()
                 .build();
 
         mSaveButton.setOnClickListener(new View.OnClickListener() {
@@ -81,6 +54,10 @@ public class MainActivity extends AppCompatActivity {
                 mUser.setAddress(mAddressEditText.getText().toString());
                 mAppDatabase.userDao().insert(mUser);
                 Log.d("tag", "");
+
+                // hide keyboard
+                InputMethodManager imm = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
+                imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
             }
         });
 
@@ -103,5 +80,14 @@ public class MainActivity extends AppCompatActivity {
         mLastNameEditText = findViewById(R.id.last_name_edit);
         mAddressEditText = findViewById(R.id.address_edit);
     }
+
+    static final Migration MIGRATION_1_2 = new Migration(1, 2) {
+        @Override
+        public void migrate(@NonNull SupportSQLiteDatabase database) {
+            database.execSQL("ALTER TABLE user "
+                    + " ADD COLUMN address TEXT");
+
+        }
+    };
 
 }

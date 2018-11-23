@@ -2,9 +2,10 @@ package com.example.jere.roomdatabase;
 
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.Index;
 import android.arch.persistence.room.PrimaryKey;
 
-@Entity
+@Entity(tableName = "user", indices = {@Index("uid")})
 public class User {
     @PrimaryKey
     public int uid;
